@@ -1,0 +1,50 @@
+--Create a Store Database
+/** EVENTS
+Brass Candlestick Holders (28, 200)
+Crystal Candlestick Holders (56, 200)
+Porcelain Decorative Glassware (10, 30)
+Crystal Decorative Glassware (34, 50)
+Victorian Era Chairs (4, 80)
+Mid Century Modern Chairs (6, 55)
+Antique Settee (2, 150)
+Antique Couch (3, 200)
+Side Tables (2, 30)
+Coffee Tables (4, 40)
+Misc Antique Props (12, 10)
+Misc Party Props (42, 10)
+Serving Trays (6, 10)
+Backdrops (8, 50)
+Vases (24, 100)
+**/
+
+CREATE TABLE Event_Rentals (id INTEGER PRIMARY KEY, item TEXT, quantity INTEGER, rental_price INTEGER, individual_item_vs_lot TEXT);
+
+INSERT INTO Event_Rentals 
+
+VALUES
+(1, "Brass Candlestick Holders", 28, 200, "lot"),
+(2, "Crystal Candlestick Holders", 56, 200, "lot"),
+(3, "Porcelain Decorative Glassware", 10, 30, "lot"),
+(4, "Crystal Decorative Glassware", 34, 50, "lot"),
+(5, "Victorian Era Chairs", 4, 80, "individual"),
+(6, "Mid Century Modern Chairs", 6, 55, "individual"),
+(7, "Antique Settee", 2, 150, "individual"),
+(8, "Antique Couch", 3, 200, "individual"),
+(9, "Side Tables", 2, 30, "individual"),
+(10, "Coffee Tables", 4, 40, "individual"),
+(11, "Misc Antique Props", 12, 10, "individual"),
+(12, "Misc Party Props", 42, 10, "individual"),
+(13, "Serving Trays", 6, 10, "individual"),
+(14, "Backdrops", 8, 50, "individual"),
+(15, "Vases", 24, 100, "lot");
+
+SELECT * FROM Event_Rentals;
+
+--Show items available for rent as lots with price from lowest to highest--
+SELECT * FROM Event_Rentals WHERE individual_item_vs_lot = "lot" ORDER BY rental_price ASC;
+
+--Show items available for rent as individual items with price from lowest to highest--
+SELECT * FROM Event_Rentals WHERE individual_item_vs_lot = "individual" ORDER BY rental_price ASC;
+
+--Show max rental amount listed for any item- individually priced or priced as a lot--
+SELECT MAX(rental_price) FROM Event_Rentals;
