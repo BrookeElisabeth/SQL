@@ -1,0 +1,78 @@
+/*CREATE MULTIPLE TABLES AND USE JOINS TO SHOW HOW THEY ARE RELATED TO EACH OTHER*/
+
+CREATE TABLE stars
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+element TEXT);
+
+INSERT into stars (name, element) VALUES ("Aries", "fire");
+INSERT into stars (name, element) VALUES ("Taurus", "NULL");
+INSERT into stars (name, element) VALUES ("Gemini", "air");
+INSERT into stars (name, element) VALUES ("Cancer", "water");
+INSERT into stars (name, element) VALUES ("Leo", "fire");
+INSERT into stars (name, element) VALUES ("Virgo", "earth");
+INSERT into stars (name, element) VALUES ("Libra", "air");
+INSERT into stars (name, element) VALUES ("Scorpio", "water");
+INSERT into stars (name, element) VALUES ("Sagittarius", "fire");
+INSERT into stars (name, element) VALUES ("Capricorn", "earth");
+INSERT into stars (name, element) VALUES ("Aquarius", "air");
+INSERT into stars (name, element) VALUES ("Pisces", "water");
+INSERT into stars (name, element) VALUES ("Lilith", "NULL");
+INSERT into stars (name, element) VALUES ("Chiron", "NULL");
+INSERT into stars (name, element) VALUES ("NorthNode", "NULL");
+
+CREATE TABLE modality
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+star_id INTEGER,
+mode TEXT,
+orient INTEGER);
+
+INSERT INTO modality (star_id, mode, orient) VALUES (1, "cardinal", 1);
+INSERT INTO modality (star_id, mode, orient) VALUES (2, "fixed", 1);
+INSERT INTO modality (star_id, mode, orient) VALUES (3, "mutable", 1);
+INSERT INTO modality (star_id, mode, orient) VALUES (4, "cardinal", 1);
+INSERT INTO modality (star_id, mode, orient) VALUES (5, "fixed", 2);
+INSERT INTO modality (star_id, mode, orient) VALUES (6, "mutable", 2);
+INSERT INTO modality (star_id, mode, orient) VALUES (7, "NULL", 2);
+INSERT INTO modality (star_id, mode, orient) VALUES (8, "fixed", 2);
+INSERT INTO modality (star_id, mode, orient) VALUES (9, "mutable", 3);
+INSERT INTO modality (star_id, mode, orient) VALUES (10, "cardinal", 3);
+INSERT INTO modality (star_id, mode, orient) VALUES (11, "fixed", 3);
+INSERT INTO modality (star_id, mode, orient) VALUES (12, "mutable", NULL);
+INSERT INTO modality (star_id, mode, orient) VALUES (13, NULL, 1);
+INSERT INTO modality (star_id, mode, orient) VALUES (14, NULL, 2);
+INSERT INTO modality (star_id, mode, orient) VALUES (15, NULL, 3);
+
+
+
+CREATE TABLE orientation
+(id INTEGER PRIMARY KEY AUTOINCREMENT,
+orient TEXT);
+
+INSERT INTO orientation (orient) VALUES ("personal");
+INSERT INTO orientation (orient) VALUES ("interpersonal");
+INSERT INTO orientation (orient) VALUES ("transpersonal");
+
+CREATE TABLE star_pairs 
+(id INTEGER PRIMARY KEY,
+couple1_id INTEGER,
+couple2_id INTEGER);
+
+INSERT INTO star_pairs (couple1_id, couple2_id)
+    VALUES(1, 8);
+INSERT INTO star_pairs (couple1_id, couple2_id)
+    VALUES(4, 2);
+
+/*USE A LEFT JOIN TO SHOW THE STARS AND THEIR ELEMENTS WITH EACH OF THEIR RESPECTIVE MODALITIES AND THOSE WITHOUT*/
+
+SELECT stars.name, stars.element, modality.mode
+FROM stars
+LEFT JOIN modality
+ON stars.id = modality.star_id;
+
+/*USE A JOIN TO SHOW THE STARS, THEIR MODES, AND THEIR ORIENTATION*/
+
+SELECT  modality.star_id, modality.mode, orientation.orient
+FROM modality
+LEFT JOIN orientation
+ON modality.orient = orientation.id;
