@@ -19,7 +19,10 @@ AND orderid <> 'Order ID'
 
 /*Which product was the cheapest one sold in January, and what was the price?*/
 SELECT DISTINCT Product, MIN(price)
-FROM BIT_DB.JanSales;
+FROM BIT_DB.JanSales
+GROUP BY product, price
+ORDER BY price ASC
+LIMIT 1;
 
 /*What is the total revenue for each product sold in January?*/
 SELECT product, SUM(quantity)*price AS revenue
